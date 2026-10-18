@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en" data-subject="ii">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>stepstr · a STEP viewer in the browser</title>
+		<meta name="description" content="stepstr opens STEP files in the browser and converts them on your device: the assembly tree, section cuts, exploded views, exact measurements, and links that keep the view." />
+		<meta name="color-scheme" content="light dark" />
+		<meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#121211" media="(prefers-color-scheme: dark)" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="preload" href="/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="stylesheet" href="/src/styles.css" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="./" />
+		<meta property="og:title" content="Open any STEP file" />
+		<meta property="og:description" content="stepstr converts STEP files on your own device, in the browser at stepstr.space or inside a Nostr app. Nothing is uploaded." />
+		<meta property="og:image" content="stills/og.jpg" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<script>document.documentElement.classList.add('js');</script>
+		<script type="module" src="/src/main.ts"></script>
+	</head>
+	<body>
+		<svg width="0" height="0" class="sprite" aria-hidden="true">
+			<defs>
+				<!-- The wordmark, traced from brand/logo.svg, drawn around y = 0 so it sits on any baseline. -->
+				<path id="wordmark" d="M14.35 0.73Q9.31 0.73 6.08 -1.46Q2.86 -3.64 2.18 -7.7L8.22 -9.26Q8.74 -6.55 10.43 -5.51Q12.12 -4.47 14.35 -4.47Q16.64 -4.47 17.73 -5.28Q18.82 -6.08 18.82 -7.28Q18.82 -8.48 17.78 -9.13Q16.74 -9.78 14.46 -10.19L13 -10.45Q10.3 -10.97 8.06 -11.88Q5.82 -12.79 4.47 -14.4Q3.12 -16.02 3.12 -18.56Q3.12 -22.41 5.93 -24.47Q8.74 -26.52 13.31 -26.52Q17.63 -26.52 20.49 -24.6Q23.35 -22.67 24.23 -19.55L18.15 -17.68Q17.73 -19.66 16.46 -20.49Q15.18 -21.32 13.31 -21.32Q11.44 -21.32 10.45 -20.67Q9.46 -20.02 9.46 -18.88Q9.46 -17.63 10.5 -17.03Q11.54 -16.43 13.31 -16.12L14.77 -15.86Q17.68 -15.34 20.05 -14.48Q22.41 -13.62 23.79 -12.04Q25.17 -10.45 25.17 -7.75Q25.17 -3.69 22.23 -1.48Q19.29 0.73 14.35 0.73ZM38.69 0Q36.14 0 34.55 -1.59Q32.97 -3.17 32.97 -5.82V-20.38H26.52V-25.79H32.97V-33.8H39.52V-25.79H46.59V-20.38H39.52V-6.97Q39.52 -5.41 40.98 -5.41H45.97V0ZM61.78 0.73Q57.93 0.73 54.99 -0.91Q52.05 -2.55 50.41 -5.54Q48.78 -8.53 48.78 -12.58V-13.21Q48.78 -17.26 50.39 -20.25Q52 -23.24 54.91 -24.88Q57.82 -26.52 61.67 -26.52Q65.47 -26.52 68.28 -24.83Q71.08 -23.14 72.64 -20.15Q74.2 -17.16 74.2 -13.21V-10.97H55.43Q55.54 -8.32 57.41 -6.66Q59.28 -4.99 61.98 -4.99Q64.74 -4.99 66.04 -6.19Q67.34 -7.38 68.02 -8.84L73.37 -6.03Q72.64 -4.68 71.27 -3.09Q69.89 -1.51 67.6 -0.39Q65.31 0.73 61.78 0.73ZM55.48 -15.86H67.55Q67.34 -18.1 65.75 -19.45Q64.17 -20.8 61.62 -20.8Q58.97 -20.8 57.41 -19.45Q55.85 -18.1 55.48 -15.86ZM78.47 10.4V-25.79H84.92V-22.67H85.85Q86.74 -24.18 88.61 -25.35Q90.48 -26.52 93.96 -26.52Q97.08 -26.52 99.74 -24.99Q102.39 -23.45 104 -20.49Q105.61 -17.52 105.61 -13.31V-12.48Q105.61 -8.27 104 -5.3Q102.39 -2.34 99.74 -0.81Q97.08 0.73 93.96 0.73Q90.48 0.73 88.63 -0.44Q86.79 -1.61 85.96 -2.96H85.02V10.4ZM91.99 -4.99Q95.06 -4.99 97.06 -6.94Q99.06 -8.89 99.06 -12.64V-13.16Q99.06 -16.9 97.03 -18.85Q95 -20.8 91.99 -20.8Q88.97 -20.8 86.94 -18.85Q84.92 -16.9 84.92 -13.16V-12.64Q84.92 -8.89 86.94 -6.94Q88.97 -4.99 91.99 -4.99ZM120.8 0.73Q115.75 0.73 112.53 -1.46Q109.3 -3.64 108.63 -7.7L114.66 -9.26Q115.18 -6.55 116.87 -5.51Q118.56 -4.47 120.8 -4.47Q123.08 -4.47 124.18 -5.28Q125.27 -6.08 125.27 -7.28Q125.27 -8.48 124.23 -9.13Q123.19 -9.78 120.9 -10.19L119.44 -10.45Q116.74 -10.97 114.5 -11.88Q112.27 -12.79 110.92 -14.4Q109.56 -16.02 109.56 -18.56Q109.56 -22.41 112.37 -24.47Q115.18 -26.52 119.76 -26.52Q124.07 -26.52 126.93 -24.6Q129.79 -22.67 130.68 -19.55L124.59 -17.68Q124.18 -19.66 122.9 -20.49Q121.63 -21.32 119.76 -21.32Q117.88 -21.32 116.9 -20.67Q115.91 -20.02 115.91 -18.88Q115.91 -17.63 116.95 -17.03Q117.99 -16.43 119.76 -16.12L121.21 -15.86Q124.12 -15.34 126.49 -14.48Q128.86 -13.62 130.23 -12.04Q131.61 -10.45 131.61 -7.75Q131.61 -3.69 128.67 -1.48Q125.74 0.73 120.8 0.73ZM145.13 0Q142.58 0 141 -1.59Q139.41 -3.17 139.41 -5.82V-20.38H132.96V-25.79H139.41V-33.8H145.96V-25.79H153.04V-20.38H145.96V-6.97Q145.96 -5.41 147.42 -5.41H152.41V0ZM157.4 0V-25.79H163.85V-22.88H164.79Q165.36 -24.44 166.69 -25.17Q168.01 -25.9 169.78 -25.9H172.9V-20.07H169.68Q167.18 -20.07 165.57 -18.75Q163.96 -17.42 163.96 -14.66V0Z" />
+				<!-- The logo's staircase: three slabs and the wall behind them. -->
+				<g id="stairs">
+					<polygon class="wall" points="48.53,41.55 28.69,53.00 28.69,45.36 35.31,41.55 35.31,33.91 41.92,30.09 41.92,22.45 48.53,18.64" />
+					<g class="slab"><polygon class="top" points="22.08,33.91 35.31,41.55 28.69,45.36 15.47,37.73" /><polygon class="front" points="15.47,45.36 28.69,53.00 28.69,45.36 15.47,37.73" /></g>
+					<g class="slab"><polygon class="top" points="28.69,22.45 41.92,30.09 35.31,33.91 22.08,26.27" /><polygon class="front" points="22.08,33.91 35.31,41.55 35.31,33.91 22.08,26.27" /></g>
+					<g class="slab"><polygon class="top" points="35.31,11.00 48.53,18.64 41.92,22.45 28.69,14.82" /><polygon class="front" points="28.69,22.45 41.92,30.09 41.92,22.45 28.69,14.82" /></g>
+				</g>
+			</defs>
+		</svg>
+
+		<header class="bar">
+			<a class="home" href="#top" aria-label="stepstr, back to the top">
+				<svg class="glyph" viewBox="12 8 40 48" aria-hidden="true"><use href="#stairs" /></svg>
+				<svg class="word" viewBox="1.9 -27.5 172 39" aria-hidden="true"><use href="#wordmark" /></svg>
+			</a>
+			<a class="action" href="https://stepstr.space">Open stepstr</a>
+		</header>
+
+		<main id="top">
+			<div class="scrolly">
+				<div class="stage" aria-hidden="true">
+					<picture class="poster">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/iso-dark.webp" />
+						<img src="stills/iso-light.webp" alt="" />
+					</picture>
+					<canvas></canvas>
+				</div>
+
+				<section class="beat" id="iso" style="--len: 1.5">
+					<div class="copy">
+						<div class="card">
+							<h1>Open any STEP&nbsp;file</h1>
+							<p class="lead">stepstr runs in your browser and converts the file on your own device, so nothing is uploaded.</p>
+							<p class="credit">
+								The SeedHammer II from the <a href="https://github.com/Gangleri42/sh-hardware">sh-hardware</a> repository, public
+								domain: 1,076 parts from an 18.2&nbsp;MB STEP file, drawn by stepstr’s viewer.
+							</p>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/iso-dark.webp" />
+						<img src="stills/iso-light.webp" alt="The SeedHammer II engraving machine, seen from above and the front left." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat" id="orbit" data-at="end" style="--len: 3.5">
+					<div class="copy">
+						<div class="card">
+							<h2>Orbit it, zoom right in</h2>
+							<p class="lead">Orbit all the way around, zoom out to the whole model, or in until one part fills the screen. Every edge is the STEP file’s own.</p>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/orbit-dark.webp" />
+						<img src="stills/orbit-light.webp" alt="The needle's tip close up, over the steel plate." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat" id="measure" data-at="start" style="--len: 2">
+					<div class="copy">
+						<div class="card">
+							<h2>Measured on the exact shape</h2>
+							<p class="lead">
+								Pick two faces, edges or points, and stepstr measures between them on the file’s exact geometry, not on the
+								triangles on screen.
+							</p>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/measure-dark.webp" />
+						<img src="stills/measure-light.webp" alt="The steel plate from the front, measured across its top face." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat" id="parts" style="--len: 2">
+					<div class="copy">
+						<div class="card">
+							<h2>Switch parts off, or keep one</h2>
+							<p class="lead">This list is the file’s own assembly tree. Switch parts off to see what they hide, or keep one alone.</p>
+							<div class="parts-ui" data-ui="parts">
+								<ul class="tree-static">
+									<li>housing</li>
+									<li>y_axis</li>
+									<li>y_carriage</li>
+									<li>x_axis</li>
+									<li>x_carriage</li>
+									<li>electronics</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/parts-dark.webp" />
+						<img src="stills/parts-light.webp" alt="The hammer’s carriage shown alone, the rest of the machine switched off." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat" id="explode" data-at="end" style="--len: 2.2">
+					<div class="copy">
+						<div class="card">
+							<h2>A simple exploded view</h2>
+							<p class="lead">One slider moves each part away from the middle of its assembly, level by level, and back again. It is plain and automatic, enough to see what sits inside.</p>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/explode-dark.webp" />
+						<img src="stills/explode-light.webp" alt="The machine exploded: its parts spread apart along the assembly's levels." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat" id="section" data-at="start" style="--len: 2.2">
+					<div class="copy">
+						<div class="card">
+							<h2>Three cuts at once</h2>
+							<p class="lead">Up to three planes, on any axis. Each takes one side away and hatches what it cuts, in the part’s own colour.</p>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/section-dark.webp" />
+						<img src="stills/section-light.webp" alt="The machine cut by three planes, the cut faces hatched." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat" id="route" style="--len: 2">
+					<div class="copy">
+						<div class="card">
+							<h2>The view lives after the&nbsp;#</h2>
+							<p class="lead">This address holds the whole view: the file’s sha256, hidden parts, cuts and camera. Browsers never send what follows the # to a server.</p>
+							<p class="address" data-ui="route"><code>stepstr.space/#/u?src=…&amp;x=a6654805…d2af4e72a</code></p>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/route-dark.webp" />
+						<img src="stills/route-light.webp" alt="The machine cut by three planes, its sled hidden: the view the address describes." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat way" id="drop" style="--len: 1">
+					<div class="copy">
+						<div class="card">
+							<h2>Drop a file or paste a link</h2>
+							<p class="lead">A file from your disk is read where it lies, and any https link to a STEP file opens if its server allows it.</p>
+							<ul class="rows" data-ui="open">
+								<li><span class="given">II-v74.step, dropped</span><code>#/b/a6654805….step?name=II-v74.step</code></li>
+								<li><span class="given">raw.githubusercontent.com/…/II-v74.step</span><code>#/u?src=https%3A%2F%2Fraw.githubusercontent.com…</code></li>
+							</ul>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/drop-dark.webp" />
+						<img src="stills/drop-light.webp" alt="The SeedHammer II, turning slowly." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat way" id="github" style="--len: 1">
+					<div class="copy">
+						<div class="card">
+							<h2>GitHub pages, zip and gzip</h2>
+							<p class="lead">A GitHub page link turns into its raw file, Git LFS included, and zipped or gzipped files are unpacked first.</p>
+							<ul class="rows" data-ui="open">
+								<li><span class="given">github.com/Gangleri42/sh-hardware/blob/main/…</span><code>#/u?src=https%3A%2F%2Fraw.githubusercontent.com…</code></li>
+								<li><span class="given">model.zip, model.step.gz</span><code>unpacked on this device</code></li>
+							</ul>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/github-dark.webp" />
+						<img src="stills/github-light.webp" alt="The SeedHammer II, turning slowly." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat way" id="blossom" style="--len: 1">
+					<div class="copy">
+						<div class="card">
+							<h2>Blossom and Nostr addresses</h2>
+							<p class="lead">A Blossom address is the file’s sha256, so any server holding it will do. A Nostr event that points at a STEP file opens too.</p>
+							<ul class="rows" data-ui="open">
+								<li><span class="given">blossom:sha256:a6654805…d2af4e72a</span><code>#/b/a6654805…d2af4e72a</code></li>
+								<li><span class="given">nevent1… or naddr1…</span><code>#/n/&lt;pointer&gt;</code></li>
+							</ul>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/blossom-dark.webp" />
+						<img src="stills/blossom-light.webp" alt="The SeedHammer II, turning slowly." loading="lazy" />
+					</picture>
+				</section>
+
+				<section class="beat napplet" id="napplet" style="--len: 1.5">
+					<div class="copy">
+						<div class="card">
+							<h2>Inside a Nostr app</h2>
+							<p class="lead">The same viewer ships as a napplet, a sandboxed page any Nostr app can host. The app hands it each file; it has no network of its own.</p>
+						</div>
+						<figure class="shot">
+							<img src="/napplet.jpg" width="1920" height="1080" alt="stepstr running as a napplet inside a notes app built to demonstrate it, with the messages between the two below." loading="lazy" />
+							<figcaption>stepstr as a napplet in a demonstration notes app. The strip below lists what the two ask each other.</figcaption>
+						</figure>
+						<div class="frame" data-frame>
+							<picture class="still">
+								<source media="(prefers-color-scheme: dark)" srcset="stills/napplet-dark.webp" />
+								<img src="stills/napplet-light.webp" alt="The SeedHammer II in a small frame of its own." loading="lazy" />
+							</picture>
+						</div>
+						<dl class="facts">
+							<div><dt>Needs</dt><dd>inc, resource</dd></div>
+							<div><dt>Uses when offered</dt><dd>theme, link, outbox, fs, storage</dd></div>
+							<div><dt>Page</dt><dd>one file, 1.1&nbsp;MB</dd></div>
+							<div><dt>Converter</dt><dd>fetched through the app by its sha256</dd></div>
+						</dl>
+					</div>
+				</section>
+
+				<section class="beat yours" id="yours" data-at="end" style="--len: 2">
+					<div class="copy">
+						<div class="card">
+							<h2>Try it</h2>
+							<p class="lead live-only">Drag the model. The address under it follows your view and opens it in stepstr exactly as you leave it.</p>
+							<p class="lead still-only">The address under the model opens this view in stepstr, where you can turn it yourself.</p>
+							<p class="address" data-ui="route"><code>stepstr.space/#/u?src=…&amp;x=a6654805…d2af4e72a</code></p>
+							<p class="handoff">
+								<a class="action" data-open data-view="yours" href="https://stepstr.space">Open this view in stepstr</a>
+								<span class="hint">Drag sideways to turn it.</span>
+							</p>
+						</div>
+					</div>
+					<picture class="still">
+						<source media="(prefers-color-scheme: dark)" srcset="stills/yours-dark.webp" />
+						<img src="stills/yours-light.webp" alt="The SeedHammer II from above and the front left." loading="lazy" />
+					</picture>
+				</section>
+			</div>
+		</main>
+
+		<footer class="endcard">
+			<section class="views" aria-labelledby="views-title">
+				<h2 id="views-title">Every view here is a link</h2>
+				<p class="lead">Each picture opens in stepstr as it is drawn above: the same file, pinned to its sha256, with the same parts, cuts and camera.</p>
+				<ul class="index">
+					<li>
+						<a data-view="iso" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/iso-dark.webp" />
+								<img src="stills/iso-light.webp" width="1200" height="1200" alt="The SeedHammer II from the front and side." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>The model</span>
+						</a>
+					</li>
+					<li>
+						<a data-view="orbit" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/orbit-dark.webp" />
+								<img src="stills/orbit-light.webp" width="1200" height="1200" alt="The needle over the steel plate." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>Up close</span>
+						</a>
+					</li>
+					<li>
+						<a data-view="measure" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/measure-dark.webp" />
+								<img src="stills/measure-light.webp" width="1200" height="1200" alt="The plate, measured across." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>Measured</span>
+						</a>
+					</li>
+					<li>
+						<a data-view="parts" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/parts-dark.webp" />
+								<img src="stills/parts-light.webp" width="1200" height="1200" alt="The hammer’s carriage, the rest switched off." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>One part</span>
+						</a>
+					</li>
+					<li>
+						<a data-view="explode" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/explode-dark.webp" />
+								<img src="stills/explode-light.webp" width="1200" height="1200" alt="The machine exploded, every level apart." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>Apart</span>
+						</a>
+					</li>
+					<li>
+						<a data-view="section" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/section-dark.webp" />
+								<img src="stills/section-light.webp" width="1200" height="1200" alt="The machine cut by three planes." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>Three cuts</span>
+						</a>
+					</li>
+					<li>
+						<a data-view="route" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/route-dark.webp" />
+								<img src="stills/route-light.webp" width="1200" height="1200" alt="The cut machine with its sled hidden, as its address describes it." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>The route</span>
+						</a>
+					</li>
+					<li>
+						<a data-view="yours" href="https://stepstr.space">
+							<picture>
+								<source media="(prefers-color-scheme: dark)" srcset="stills/yours-dark.webp" />
+								<img src="stills/yours-light.webp" width="1200" height="1200" alt="The machine from the front and side, as you take it." fetchpriority="low" decoding="async" />
+							</picture>
+							<span>Yours</span>
+						</a>
+					</li>
+				</ul>
+			</section>
+			<div class="tiles">
+				<div class="tile statement">
+					<p>stepstr is free and in the public domain. It runs at stepstr.space and inside Nostr apps.</p>
+					<p class="legal">
+						Public domain (Unlicense). The converter contains Open CASCADE Technology, under the LGPL&nbsp;2.1 with the Open
+						CASCADE exception. The wordmark is set in Space Grotesk, under the SIL Open Font License.
+					</p>
+				</div>
+				<div class="tile model">
+					<p>
+						The SeedHammer II comes from the sh-hardware repository, in the public domain under the Unlicense. This page shows
+						it converted and compressed by stepstr.
+					</p>
+					<p class="links">
+						<a href="model/LICENSE.txt">Licence</a>
+						<a href="https://github.com/Gangleri42/sh-hardware">Repository</a>
+					</p>
+				</div>
+				<div class="tile name" aria-hidden="true">
+					<svg viewBox="1.9 -27.5 172 39"><use href="#wordmark" /></svg>
+				</div>
+				<a class="tile go" href="https://stepstr.space">
+					<span>Open stepstr</span>
+					<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 32L32 8M14 8h18v18" /></svg>
+				</a>
+			</div>
+		</footer>
+	</body>
+</html>

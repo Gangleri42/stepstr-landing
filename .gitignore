@@ -1,0 +1,19 @@
+node_modules
+
+# The build
+/dist
+
+# The models, their conversions and the stills (npm run model, npm run stills)
+/.cache
+
+# OS and editors
+.DS_Store
+.idea
+*.swp
+
+# Vite
+vite.config.ts.timestamp-*
+
+# Browser test output
+/test-results
+/playwright-report

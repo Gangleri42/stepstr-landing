@@ -1,0 +1,833 @@
+/* stepstr's landing page. The brand's paper, ink and orange, following the system scheme; Space Grotesk sets the
+   headlines and the wordmark, the system face everything else, as in the app. The arm is drawn by the app's own viewer
+   on a sticky stage behind the copy; the colour names the app's components read are defined here too. */
+
+@font-face {
+	font-family: 'Space Grotesk'; /* The brand's own face, the wordmark's. taste-skill-ignore */
+	src: url('/SpaceGrotesk.woff2') format('woff2');
+	font-weight: 300 700;
+	font-display: swap;
+}
+
+:root {
+	--paper: #f3f2ee;
+	--ink: #1c1c1a;
+	--muted: #6b6a64;
+	--tone: #e8e6df;
+	--accent: #e2561b;
+	--accent-text: #b8410f;
+	--on-accent: #1c1c1a;
+	/* What the app's part tree and Measure read. */
+	--text: var(--ink);
+	--line: #1c1c1a1f;
+	--field: #ffffffb3;
+	--hover: #1c1c1a0d;
+	--accent-soft: #e2561b24;
+	--surface-solid: #ffffff;
+	--measure: var(--accent);
+	--measure-soft: var(--accent-soft);
+	--measure-text: var(--accent-text);
+	--shadow: none;
+	/* What the viewer reads for its palette. */
+	--edges: #1a1a18;
+	--ground: #3a3020;
+
+	--font-display: 'Space Grotesk', system-ui, sans-serif;
+	--font-text: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-code: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; /* Routes only: literal code. taste-skill-ignore */
+	--step-small: 0.875rem;
+	--step-body: 1.0625rem;
+	--step-lead: clamp(1.0625rem, 0.95rem + 0.45vw, 1.375rem);
+	--step-display: clamp(2rem, 1rem + 3.9vw, 4.5rem);
+
+	--margin: clamp(1rem, 2.2vw, 2rem);
+	--gutter: clamp(0.75rem, 1.4vw, 1.5rem);
+	--bar: 4rem;
+	--radius: 4px;
+	color-scheme: light;
+}
+:root[data-theme='dark'] {
+	--paper: #121211;
+	--ink: #ecebe6;
+	--muted: #9b9a93;
+	--tone: #1f1f1d;
+	--accent: #f26b30;
+	--accent-text: #ff8a55;
+	--line: #ecebe61f;
+	--field: #ffffff0d;
+	--hover: #ecebe614;
+	--accent-soft: #f26b3029;
+	--surface-solid: #262624;
+	--edges: #000000;
+	--ground: #000000;
+	color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--paper: #121211;
+		--ink: #ecebe6;
+		--muted: #9b9a93;
+		--tone: #1f1f1d;
+		--accent: #f26b30;
+		--accent-text: #ff8a55;
+		--line: #ecebe61f;
+		--field: #ffffff0d;
+		--hover: #ecebe614;
+		--accent-soft: #f26b3029;
+		--surface-solid: #262624;
+		--edges: #000000;
+		--ground: #000000;
+		color-scheme: dark;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+html {
+	background: var(--paper);
+	color: var(--ink);
+	-webkit-text-size-adjust: 100%;
+	scroll-padding-top: var(--bar);
+}
+body {
+	margin: 0;
+	font: var(--step-body) / 1.5 var(--font-text);
+	font-kerning: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: transparent;
+}
+h1,
+h2,
+p,
+ul,
+dl,
+dd,
+figure {
+	margin: 0;
+}
+a {
+	color: inherit;
+}
+a:focus-visible,
+button:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+::selection {
+	background: var(--accent);
+	color: var(--on-accent);
+}
+.sprite {
+	position: absolute;
+}
+
+/* The bar: the wordmark and one action, on opaque paper. */
+.bar {
+	position: sticky;
+	top: 0;
+	z-index: 3;
+	height: var(--bar);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 var(--margin);
+	background: var(--paper);
+}
+.home {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	text-decoration: none;
+}
+.home .glyph {
+	width: 2.25rem;
+	height: 2.25rem;
+}
+.home .word {
+	width: 6.5rem;
+	fill: var(--ink);
+}
+.wall {
+	fill: var(--accent);
+}
+.slab .top {
+	fill: var(--paper);
+}
+.slab .front {
+	fill: #b9b7af;
+}
+:root .glyph .slab .top {
+	fill: var(--ink);
+}
+.action {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	padding: 0 1.125rem;
+	border-radius: var(--radius);
+	background: var(--accent);
+	color: var(--on-accent);
+	font: 600 var(--step-body) / 1 var(--font-text);
+	text-decoration: none;
+	transition:
+		transform 0.15s ease,
+		background-color 0.15s ease;
+}
+.action:hover {
+	background: color-mix(in srgb, var(--accent) 88%, var(--ink));
+}
+.action:active {
+	transform: translateY(1px) scale(0.98);
+}
+
+/* The story: a sticky stage the beats scroll over. */
+.scrolly {
+	position: relative;
+}
+.stage {
+	position: sticky;
+	top: 0;
+	z-index: 0;
+	height: 100lvh;
+	margin-bottom: -100lvh;
+	overflow: clip;
+}
+.stage canvas {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	opacity: 0;
+	transition: opacity 0.6s ease;
+}
+.stage.live canvas {
+	opacity: 1;
+}
+.stage.turnable canvas {
+	cursor: grab;
+}
+.stage.turnable canvas:active {
+	cursor: grabbing;
+}
+.poster {
+	position: absolute;
+	top: var(--bar);
+	right: 0;
+	width: 62%;
+	height: calc(100svh - var(--bar));
+	transition: opacity 0.6s ease;
+}
+.poster img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+.poster.gone,
+.stage.live .poster {
+	opacity: 0;
+}
+.index li.gone,
+.still.gone {
+	display: none !important;
+}
+
+.beat {
+	position: relative;
+	z-index: 1;
+	min-height: calc(var(--len) * 100svh);
+	/* The stage under the beats takes the pointer; only what the copy holds is in the way. */
+	pointer-events: none;
+}
+.copy {
+	position: sticky;
+	top: 0;
+	height: 100svh;
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	column-gap: var(--gutter);
+	align-content: center;
+	padding: var(--bar) var(--margin) 0;
+	pointer-events: none;
+}
+.card {
+	grid-column: 1 / span 5;
+	pointer-events: auto;
+	padding: 1.25rem 1.5rem;
+	margin-inline: -1.5rem;
+	transition: background-color 0.4s ease;
+}
+/* The copy steps between the top, the middle and the foot of the column from beat to beat. */
+.beat[data-at='start'] .copy {
+	align-content: start;
+	padding-top: calc(var(--bar) + 6vh);
+}
+.beat[data-at='end'] .copy {
+	align-content: end;
+	padding-bottom: 7vh;
+}
+
+/* While a shot fills the whole stage, or looks inside the model, the model passes behind the copy: the copy keeps a
+   ground of paper (stage.ts). */
+html.ground .card {
+	background: color-mix(in srgb, var(--paper) 90%, transparent);
+}
+h1,
+h2 {
+	font: 500 var(--step-display) / 1 var(--font-display);
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+	max-width: 13ch;
+	margin-left: -0.04em;
+}
+.lead {
+	margin-top: 1.25rem;
+	font-size: var(--step-lead);
+	line-height: 1.4;
+	max-width: 34ch;
+	text-wrap: pretty;
+}
+.credit {
+	margin-top: 1.5rem;
+	font-size: var(--step-small);
+	line-height: 1.45;
+	color: var(--muted);
+	max-width: 44ch;
+}
+.credit a {
+	color: inherit;
+	text-underline-offset: 0.15em;
+}
+
+/* Fragments of the app, at its own size: the route, the open box's rows, the part tree. */
+[data-ui] {
+	font: 400 var(--step-small) / 1.45 var(--font-text);
+}
+.address {
+	margin-top: 1.5rem;
+	padding: 0.625rem 0.75rem;
+	border-radius: 8px;
+	background: var(--tone);
+	max-width: 36rem;
+}
+.address code {
+	font: 400 0.8125rem / 1.5 var(--font-code);
+	word-break: break-all;
+	color: var(--muted);
+}
+.address code b {
+	font-weight: 400;
+	color: var(--ink);
+}
+.address code b.new {
+	color: var(--accent-text);
+}
+.rows {
+	list-style: none;
+	padding: 0;
+	margin-top: 1.5rem;
+	max-width: 36rem;
+}
+.rows li {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	min-height: 2.25rem;
+	padding: 0.4rem 0;
+}
+.rows .given {
+	color: var(--ink);
+	font-size: var(--step-small);
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	flex: 0 1 auto;
+}
+.rows code {
+	font: 400 0.8125rem / 1.45 var(--font-code);
+	color: var(--muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 0 1 50%;
+	text-align: right;
+}
+.parts-ui {
+	margin-top: 1.25rem;
+	height: 17.5rem;
+	display: flex;
+	flex-direction: column;
+	padding-top: 0.5rem;
+	border-radius: 8px;
+	background: var(--tone);
+	color: var(--ink);
+	max-width: 24rem;
+	overflow: hidden;
+}
+.tree-static {
+	list-style: none;
+	padding: 0 0.75rem;
+}
+.tree-static li {
+	min-height: 1.875rem;
+	display: flex;
+	align-items: center;
+}
+.handoff {
+	margin-top: 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem 1.25rem;
+}
+.hint {
+	display: none;
+	color: var(--muted);
+	font-size: var(--step-small);
+}
+@media (pointer: coarse) {
+	.stage.turnable ~ .yours .hint,
+	.hint.shown {
+		display: inline;
+	}
+}
+
+/* The napplet: the real screenshot as a wide tile, and the live stage clipped into the tile beside it. */
+.napplet .copy {
+	grid-template-rows: auto auto auto;
+	align-content: center;
+	row-gap: 0;
+}
+.napplet .card {
+	grid-column: 1 / span 6;
+	grid-row: 1;
+	padding-bottom: 0;
+}
+.napplet .shot {
+	grid-column: 1 / span 7;
+	grid-row: 2 / span 2;
+	margin-top: 2.5rem;
+	pointer-events: auto;
+}
+.napplet .frame {
+	grid-column: 8 / span 5;
+	grid-row: 2;
+	margin-top: 2.5rem;
+	aspect-ratio: 4 / 3;
+}
+.napplet .facts {
+	grid-column: 8 / span 5;
+	grid-row: 3;
+	align-self: start;
+	margin-top: 1.25rem;
+	pointer-events: auto;
+}
+.shot img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+}
+.shot figcaption {
+	margin-top: 0.625rem;
+	font-size: var(--step-small);
+	color: var(--muted);
+	max-width: 52ch;
+}
+.facts {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem 1.5rem;
+	max-width: 30rem;
+}
+.facts dt {
+	font-size: var(--step-small);
+	color: var(--muted);
+}
+.facts dd {
+	font-size: var(--step-body);
+}
+
+.yours h2 {
+	font-size: clamp(2.5rem, 1rem + 6vw, 7rem);
+	line-height: 0.92;
+}
+
+.still-only,
+html:not(.js) .live-only,
+html.still-mode .live-only {
+	display: none;
+}
+html:not(.js) .still-only,
+html.still-mode .still-only {
+	display: block;
+}
+
+/* Without the live view: each beat shows its still where the stage would be, held beside its copy for the whole beat;
+   the napplet's still sits in its frame. */
+.still {
+	display: none;
+}
+.still img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+html:not(.js) .stage,
+html.still-mode .stage {
+	display: none;
+}
+html:not(.js) .beat,
+html.still-mode .beat {
+	display: grid;
+}
+html:not(.js) .beat > *,
+html.still-mode .beat > * {
+	grid-area: 1 / 1;
+}
+html:not(.js) .beat > .still,
+html.still-mode .beat > .still {
+	display: block;
+	position: sticky;
+	top: var(--bar);
+	align-self: start;
+	justify-self: end;
+	width: 62%;
+	height: calc(100svh - var(--bar));
+}
+html:not(.js) .copy,
+html.still-mode .copy {
+	z-index: 1;
+}
+html:not(.js) .frame .still,
+html.still-mode .frame .still {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	overflow: hidden;
+	background: var(--tone);
+}
+
+/* A still being photographed (scripts/landing-stills.ts): the stage alone, already faded in. */
+html.shot .stage canvas {
+	transition: none;
+}
+html.shot .bar,
+html.shot .beat,
+html.shot .endcard,
+html.shot .poster {
+	visibility: hidden;
+}
+
+html.og .bar,
+html.og .credit {
+	visibility: hidden;
+}
+
+/* The end: the four things once more, with their pictures, then the tiles. */
+.endcard {
+	position: relative;
+	z-index: 1;
+	background: var(--paper);
+	padding: clamp(5rem, 12vh, 10rem) var(--margin) 0.75rem;
+}
+.views h2 {
+	max-width: 14ch;
+}
+.index {
+	list-style: none;
+	padding: 0;
+	margin: clamp(2.5rem, 6vh, 4rem) 0 0;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: var(--gutter);
+}
+.index a {
+	display: block;
+	text-decoration: none;
+	color: var(--ink);
+}
+.index picture,
+.index img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1;
+	border-radius: 4px;
+	background: var(--tone);
+}
+.index img {
+	transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.index a:hover img {
+	transform: scale(1.03);
+}
+.index picture {
+	overflow: hidden;
+}
+.index span {
+	display: block;
+	margin-top: 0.5rem;
+	font-size: var(--step-small);
+}
+.index a:hover span {
+	color: var(--accent-text);
+}
+.tiles {
+	margin-top: clamp(4rem, 10vh, 8rem);
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	gap: 8px;
+	margin-inline: calc(var(--margin) * -1 + 8px);
+}
+.tile {
+	padding: 1.5rem;
+	border-radius: 4px;
+	background: var(--tone);
+	min-height: 13.75rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1.5rem;
+}
+.tile.statement {
+	grid-column: 1 / span 6;
+}
+.tile.statement p:first-child {
+	font: 500 var(--step-lead) / 1.3 var(--font-display);
+	letter-spacing: -0.01em;
+	max-width: 26ch;
+}
+.legal {
+	font-size: var(--step-small);
+	color: var(--muted);
+	max-width: 60ch;
+}
+.tile.model {
+	grid-column: 7 / span 6;
+}
+.tile.model p:first-child {
+	max-width: 44ch;
+}
+.links {
+	display: flex;
+	gap: 1.25rem;
+	flex-wrap: wrap;
+}
+.links a {
+	text-underline-offset: 0.2em;
+}
+.tile.name {
+	grid-column: 1 / span 8;
+	min-height: 20rem;
+	background: var(--ink);
+	justify-content: center;
+	align-items: center;
+}
+.tile.name svg {
+	width: 72%;
+	fill: var(--paper);
+}
+.tile.go {
+	grid-column: 9 / span 4;
+	min-height: 20rem;
+	background: var(--accent);
+	color: var(--on-accent);
+	text-decoration: none;
+	font: 500 var(--step-lead) / 1.2 var(--font-display);
+	letter-spacing: -0.01em;
+	transition: background-color 0.15s ease;
+}
+.tile.go:hover {
+	background: color-mix(in srgb, var(--accent) 88%, var(--ink));
+}
+.tile.go svg {
+	align-self: flex-end;
+	width: 3.5rem;
+	height: 3.5rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 4;
+	transition: transform 0.2s ease;
+}
+.tile.go:hover svg {
+	transform: translate(4px, -4px);
+}
+
+/* The phone: the copy is a card at the bottom, the arm above it. */
+/* Between a tablet and a wide screen the copy takes a wider column, so headlines keep to two lines. */
+@media (min-width: 901px) and (max-width: 1199px) {
+	.card {
+		grid-column: 1 / span 6;
+	}
+}
+
+/* Phones and tablets held upright: the copy is a card at the bottom, the arm above it. */
+@media (max-width: 900px) {
+	:root {
+		--bar: 3.5rem;
+	}
+	.home .word {
+		width: 5.5rem;
+	}
+	.action {
+		min-height: 2.75rem;
+		padding: 0 0.875rem;
+	}
+	.copy,
+	.beat[data-at] .copy {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		padding: 0 0 env(safe-area-inset-bottom);
+	}
+	.card {
+		margin: 0;
+		padding: 1rem var(--margin) 1.25rem;
+		background: color-mix(in srgb, var(--paper) 92%, transparent);
+	}
+	.lead {
+		margin-top: 0.625rem;
+	}
+	.credit {
+		margin-top: 0.75rem;
+	}
+	.parts-ui {
+		height: 9.5rem;
+		margin-top: 0.75rem;
+	}
+	.address,
+	.rows,
+	.handoff {
+		margin-top: 0.875rem;
+	}
+	.rows .given {
+		font-size: var(--step-small);
+	}
+	.napplet .copy {
+		position: relative;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		padding: calc(var(--bar) + 1rem) var(--margin) 2rem;
+	}
+	.napplet .card {
+		margin: 0 calc(var(--margin) * -1);
+	}
+	.napplet .shot,
+	.napplet .frame,
+	.napplet .facts {
+		margin-top: 1.25rem;
+	}
+	.napplet .frame {
+		width: 100%;
+		aspect-ratio: 3 / 2;
+	}
+	.poster,
+	html:not(.js) .beat > .still,
+	html.still-mode .beat > .still {
+		width: 100%;
+		height: 55svh;
+	}
+	.tiles {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 6px;
+	}
+	.index {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.tile {
+		padding: 1.25rem;
+		min-height: 0;
+	}
+	.tile.name {
+		grid-column: 1 / -1;
+		order: -2;
+		min-height: 10rem;
+	}
+	.tile.go {
+		grid-column: 1 / -1;
+		order: -1;
+		min-height: 10rem;
+	}
+	.tile.statement,
+	.tile.model {
+		grid-column: 1 / -1;
+	}
+}
+
+/* Motion. html.motion is set by the page's script, so nothing waits hidden for a script that never ran; under reduced
+   motion it is never set. Each card's parts rise in reading order as the card arrives, once. */
+:root {
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--t-reveal: 760ms;
+}
+html.motion .card > *,
+html.motion .napplet .shot,
+html.motion .napplet .facts,
+html.motion .views > *,
+html.motion .index li,
+html.motion .tile {
+	opacity: 0;
+	translate: 0 24px;
+	transition:
+		opacity var(--t-reveal) var(--ease-out),
+		translate var(--t-reveal) var(--ease-out);
+	transition-delay: calc(var(--i, 0) * 80ms);
+}
+html.motion .in > *,
+html.motion .napplet .in,
+html.motion .index.in li,
+html.motion .tiles.in .tile {
+	opacity: 1;
+	translate: none;
+}
+.card > :nth-child(2),
+.index li:nth-child(2),
+.tile:nth-child(2) {
+	--i: 1;
+}
+.card > :nth-child(3),
+.index li:nth-child(3),
+.tile:nth-child(3) {
+	--i: 2;
+}
+.card > :nth-child(n + 4),
+.index li:nth-child(4),
+.tile:nth-child(4) {
+	--i: 3;
+}
+.index li:nth-child(5) {
+	--i: 1.5;
+}
+.index li:nth-child(6) {
+	--i: 2.5;
+}
+.index li:nth-child(7) {
+	--i: 3.5;
+}
+.index li:nth-child(8) {
+	--i: 4.5;
+}
+/* The route's newest key fades from orange back to the route's own ink. */
+.address code b {
+	transition: color 1.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}

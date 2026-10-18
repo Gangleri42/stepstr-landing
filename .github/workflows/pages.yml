@@ -1,0 +1,64 @@
+name: Pages
+
+# Builds the landing pages and serves them from GitHub Pages at the address in subjects.ts. stepstr comes in as the
+# pinned submodule. Its converter build is not in any repository: the napplet publishes the same build on Blossom as
+# converter.txt (the wasm gzipped, then base64), fetched here by that file's sha256 and checked against the wasm's
+# sha256 in stepstr/converter/converter.lock.json. A new converter in stepstr means a new submodule commit and a new
+# address here, together.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: true
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      # The submodule's code reads its packages from this repository's node_modules.
+      - run: ln -s ../node_modules stepstr/node_modules
+      - name: The converter build, from Blossom
+        run: |
+          mkdir -p stepstr/converter/dist
+          curl -sSfL https://bls.unrug.tech/300234e26fefa0bfef522508b879200d26c6df975cae0b23d9e78db480569ebb.txt | base64 -d | gunzip > stepstr/converter/dist/converter.wasm
+          node -e "
+            const { createHash } = require('node:crypto');
+            const { readFileSync } = require('node:fs');
+            const lock = JSON.parse(readFileSync('stepstr/converter/converter.lock.json', 'utf8'));
+            const got = createHash('sha256').update(readFileSync('stepstr/converter/dist/converter.wasm')).digest('hex');
+            if (got !== lock.wasm.sha256) { console.error('converter.wasm is ' + got + '; the lock names ' + lock.wasm.sha256); process.exit(1); }
+            console.log('converter ' + got.slice(0, 12) + ', as locked');
+          "
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  # Runs no project code; the only job that may write to Pages.
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

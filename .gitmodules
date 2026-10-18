@@ -1,0 +1,3 @@
+[submodule "stepstr"]
+	path = stepstr
+	url = https://github.com/Gangleri42/stepstr.git

@@ -1,0 +1,41 @@
+{
+	"copyright": "SeedHammer II by SeedHammer",
+	"source": {
+		"repository": "https://github.com/Gangleri42/sh-hardware",
+		"commit": "43647aabdef8afe07e429fab578c8c9217bef1fb",
+		"path": "II/II-v74.step",
+		"url": "https://raw.githubusercontent.com/Gangleri42/sh-hardware/43647aabdef8afe07e429fab578c8c9217bef1fb/II/II-v74.step",
+		"sha256": "a6654805c3c32794d01d7baaa23071d580e26931895c6546ac43da4d2af4e72a",
+		"size": 18187390,
+		"licence": "Unlicense",
+		"licenceFile": {
+			"path": "LICENSE",
+			"url": "https://raw.githubusercontent.com/Gangleri42/sh-hardware/43647aabdef8afe07e429fab578c8c9217bef1fb/LICENSE",
+			"sha256": "b5065838cbac452dfc855ba6e6e031481ad2c68406f70d21ead9321374653e6c",
+			"size": 1212
+		}
+	},
+	"up": "z",
+	"measure": ["24ztc1.v6.8v", "24ztc1.v9.so"],
+	"measureRows": {
+		"distance": "85.00 mm",
+		"dx": "0.00 mm",
+		"dy": "85.00 mm",
+		"dz": "0.00 mm"
+	},
+	"names": {
+		"housing": "housing",
+		"leftWall": "left",
+		"deck": "faceplate",
+		"electronics": "electronics",
+		"carriage": "x_carriage",
+		"sled": "y_carriage",
+		"plate": "plate",
+		"hammerhead": "hammerhead",
+		"needle": "needle",
+		"rodBack": "y_rod (2)"
+	},
+	"points": {
+		"needleTip": [0, 0, 63.5]
+	}
+}

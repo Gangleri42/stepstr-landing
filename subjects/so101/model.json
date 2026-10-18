@@ -1,0 +1,72 @@
+{
+	"copyright": "SO-101 arm by TheRobotStudio",
+	"source": {
+		"repository": "https://github.com/TheRobotStudio/SO-ARM100",
+		"commit": "5f6d2b876a53a4872e405b991dd925556c9e38a4",
+		"path": "STEP/SO101/SO101 Assembly.step",
+		"url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/STEP/SO101/SO101%20Assembly.step",
+		"sha256": "f754be35708382b05ce65768ae33c612f91dca11ad19d14807dc637eb944ba3d",
+		"size": 20496014,
+		"licence": "Apache-2.0",
+		"licenceFile": {
+			"path": "LICENSE",
+			"url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/LICENSE",
+			"sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+			"size": 11357
+		}
+	},
+	"up": "z",
+	"measure": ["vbs8ab.c653.v3", "yxkl9d.c502.21"],
+	"measureRows": {
+		"distance": "116.03 mm",
+		"dx": "0.01 mm",
+		"dy": "112.43 mm",
+		"dz": "28.69 mm"
+	},
+	"names": {
+		"base": "Base_SO101 v12",
+		"base08p": "Base_08p v18",
+		"rotationPitch": "Rotation_Pitch_SO101 v8",
+		"upperArm": "Upper_arm_SO101 v9",
+		"underArm": "Under_arm_SO101 v12",
+		"motorHolderBase": "Motor_holder_SO101_Base v6",
+		"motorHolderWrist": "Motor_holder_SO101_Wrist v8",
+		"wristRollPitch": "Wrist_Roll_Pitch_SO100 v15",
+		"fixedJaw": "Wrist_Roll_Follower_SO101 v10",
+		"movingJaw": "Moving_Jaw_SO101 v3",
+		"busServoAdapter": "Bus Servo Adapter (A) v3",
+		"servoPan": "ST3215 Servo v2",
+		"servoShoulder": "ST3215 Servo v2 (2)",
+		"servoElbow": "ST3215 Servo v2 (3)",
+		"servoWristFlex": "ST3215 Servo v2 (4)",
+		"servoWristRoll": "ST3215 Servo v2 (5)",
+		"servoGripper": "ST3215 Servo v2 (6)",
+		"caseTop": { "name": "SG-ZIJI_15", "in": "servoPan" },
+		"caseMiddle": { "name": "ZK_122", "in": "servoPan" },
+		"caseBottom": { "name": "XG-ZIJI_16", "in": "servoPan" },
+		"motor": { "name": "MOTOR-1723_3", "in": "servoPan" },
+		"gear": { "name": "GE_27", "in": "servoPan" },
+		"connectorBoard": { "name": "PCB-CHAZUO_92", "in": "servoPan" },
+		"hornDrive": { "name": "金属舵盘（驱动） v2", "in": "servoPan" },
+		"hornIdle": { "name": "金属舵盘（从动） v2", "in": "servoPan" }
+	},
+	"points": {
+		"jawTip": [5.66, -156.41, 253.07],
+		"gripper": [5.11, -173.81, 184.83]
+	},
+	"missingFace": {
+		"part": "Bus Servo Adapter (A) v3 > Type_C1 > 698b116-264-211 > SOLID",
+		"body": "l9nh78",
+		"solid": 29,
+		"face": 73,
+		"at": [-7.52, 67.67, 33.64],
+		"note": "A 0.0002 mm² sliver of the USB-C socket's shell. Only the counting pass (0.05 mm) leaves it out; the model's own mesh has it."
+	},
+	"nurbsFace": {
+		"part": "Bus Servo Adapter (A) v3 > Type_C1 > 698b116-264-211 > SOLID",
+		"body": "l9nh78",
+		"solid": 29,
+		"at": [-10.3, 67.3, 36.7],
+		"note": "One face of the USB-C socket, meshed as NURBS in the model's mesh. The counting pass also falls back once in Motor_holder_SO101_Base v6 (solid 5), whose final mesh does not."
+	}
+}
