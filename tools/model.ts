@@ -128,6 +128,8 @@ async function convert(step: Uint8Array, sha: string, fileName: string, wasmPath
 	// run.ts and the pipeline behind it import each other through $lib, which only Vite resolves.
 	const { module } = await runnerImport<{ convertStep: ConvertStep }>(at('stepstr/src/lib/convert/run.ts'), {
 		logLevel: 'warn',
+		// One tsconfig for every file, as in vite.config.ts: the submodule's extends a file this checkout lacks.
+		tsconfig: at('tsconfig.json'),
 		resolve: { alias: { $lib: at('stepstr/src/lib') } }
 	});
 	const wasm = await loadConverter(readFileSync(wasmPath), { onOutput: () => {} });
