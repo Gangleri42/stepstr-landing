@@ -12,6 +12,7 @@ import type { Connect, Plugin } from 'vite';
 import { defineConfig } from 'vitest/config';
 import { cacheOf, LANDING_ORIGIN, SUBJECTS } from './subjects.ts';
 import { mimeOf, readConfig } from './stepstr/pipeline/nostr/config.ts';
+import { siteModule } from './stepstr/pipeline/site.ts';
 
 const at = (path: string) => fileURLToPath(new URL(path, import.meta.url));
 
@@ -156,7 +157,9 @@ export default defineConfig({
 	// Its own dependency cache, so this dev server and the app's do not outdate each other's bundles.
 	cacheDir: at('./node_modules/.vite'),
 	resolve: { alias: [{ find: '$lib', replacement: at('./stepstr/src/lib') }] },
-	plugins: [landingModel(), svelte({ configFile: false, preprocess: vitePreprocess(), compilerOptions: { runes: true } })],
+	// siteModule: stepstr's virtual:stepstr-site, which its route code reads; these pages are stepstr's, so they take
+	// stepstr's own site.
+	plugins: [landingModel(), siteModule(), svelte({ configFile: false, preprocess: vitePreprocess(), compilerOptions: { runes: true } })],
 	build: {
 		outDir: at('./dist'),
 		emptyOutDir: true,

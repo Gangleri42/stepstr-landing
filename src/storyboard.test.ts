@@ -162,7 +162,7 @@ for (const { id, page } of SUBJECTS) {
 		const model = describeModel(scene, parts, (factor) => explode.set(factor), settled.up, settled.points);
 		const resolved = resolve(STORYBOARD, model);
 		const refs = settled.measure.map(parseRef).filter((ref): ref is MeasureRef => !!ref);
-		const topology = new Topology(summary.measure, parts);
+		const topology = new Topology([summary.measure], parts);
 		const measured = refs
 			.map((ref) => topology.entity(ref))
 			.flatMap((entity) => (entity?.type === 'point' ? [entity.position.toArray() as Vec3] : []));

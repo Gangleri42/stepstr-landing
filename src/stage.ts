@@ -85,7 +85,8 @@ export async function start({ stage, canvas, poster, mode, reduced, subject, onF
 	const tool = new MeasureTool(viewer, { change() {}, outcome() {} });
 	viewer.setTool(tool);
 	stage.querySelector('.measure-layer')?.setAttribute('data-ui', 'measure');
-	tool.setModel(model.data);
+	// The page's model is the scene's only file.
+	tool.setModel([model.data]);
 	tool.setSelection(model.measure.map(parseRef).filter((ref): ref is MeasureRef => !!ref && tool.valid(ref)));
 
 	const slot = document.querySelector<HTMLElement>('[data-ui=parts]');

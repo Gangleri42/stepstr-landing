@@ -1,3 +1,7 @@
+// stepstr's own virtual modules: the pages serve neither, but the types of stepstr modules they import reach them
+// (state/route.ts takes the site's role from virtual:stepstr-site).
+/// <reference path="../stepstr/src/virtual.d.ts" />
+
 // What vite.config.ts hands each page: the settled choices of subjects/<id>/model.json, plus what
 // tools/model.ts made of that subject's file.
 declare module 'virtual:landing-model/*' {

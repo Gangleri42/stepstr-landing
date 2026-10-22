@@ -88,8 +88,8 @@ for (const { id } of SUBJECTS) {
 			const { summary, settled, glb, original, full } = model();
 			const refs = settled.measure.map((token) => parseRef(token)).filter((ref): ref is MeasureRef => !!ref);
 			expect(refs).toHaveLength(2);
-			const page = new Topology(summary.measure, await parts(glb));
-			const app = new Topology(full, await parts(original));
+			const page = new Topology([summary.measure], await parts(glb));
+			const app = new Topology([full], await parts(original));
 			for (const ref of refs) {
 				expect(page.valid(ref), `${settled.measure} on the page`).toBe(true);
 				expect(app.valid(ref), `${settled.measure} in the app`).toBe(true);
